@@ -13,8 +13,10 @@ import {
 import { numberFormat } from '../../helpers'
 import { fetchGet } from '../../helpers/myFetch'
 import { debounce } from 'lodash'
-
+var idLocale = require('moment/locale/id');
+moment.locale('id', idLocale);  
 const Store = (props) => {
+
 
     const [data, setData] = useState([])
     const [page, setPage] = useState(1)
@@ -76,6 +78,7 @@ const Store = (props) => {
                                         <th>Nama Outlet</th>
                                         <th>Nama Owner</th>
                                         <th>Telepon</th>
+                                        <th>Email</th>
                                         <th>Masa Aktif</th>
                                         <th>Saldo</th>
                                         <th>Opsi</th>
@@ -90,7 +93,10 @@ const Store = (props) => {
                                                 <td>{el.name}</td>
                                                 <td>{el.userId.fullname}</td>
                                                 <td>{el.phone}</td>
-                                                <td>{moment(el.dueDate).format('DD MMM YYYY')}</td>
+                                                <td>{el.userId.email}</td>
+                                                <td>{
+                                                    el.expired ? 'HABIS' : moment(el.dueDate).format('DD MMMM YYYY')
+                                                }</td>
                                                 <td>{numberFormat(el.userId.saldo)}</td>
                                                 <td>
                                                     <button className="btn btn-sm btn-success" onClick={() => toggle(el)}>Detail</button> 
@@ -140,9 +146,14 @@ const Store = (props) => {
                                         <td>{obj.phone}</td>
                                     </tr>
                                     <tr>
+                                        <td>Tanggal Daftar</td>
+                                        <td>:</td>
+                                        <td>{moment(obj.createdAt).format('LLLL')}</td>
+                                    </tr>
+                                    <tr>
                                         <td>Masa Aktif</td>
                                         <td>:</td>
-                                        <td>{moment(obj.dueDate).format('DD MMM YYYY')}</td>
+                                        <td>{moment(obj.dueDate).format('LLLL')}</td>
                                     </tr>
                                     <tr>
                                         <td>Expired</td>
