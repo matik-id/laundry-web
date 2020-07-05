@@ -94,7 +94,7 @@ const Store = (props) => {
                                                 <td>{numberFormat(el.userId.saldo)}</td>
                                                 <td>
                                                     <button className="btn btn-sm btn-success" onClick={() => toggle(el)}>Detail</button> 
-                                                    <a href={'https://wa.me/+62'+handphone.substr(1)} className="btn btn-sm btn-success">Whatsapp</a>
+                                                    <a href={'https://wa.me/62'+handphone.substr(1)} className="btn btn-sm btn-success">Whatsapp</a>
                                                 </td>
                                             </tr>
                                         )
