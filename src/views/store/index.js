@@ -92,7 +92,8 @@ const Store = (props) => {
                                                 <td>{moment(el.dueDate).format('DD MMM YYYY')}</td>
                                                 <td>{numberFormat(el.userId.saldo)}</td>
                                                 <td>
-                                                    <button className="btn btn-sm btn-success" onClick={() => toggle(el)}>Detail</button>
+                                                    <button className="btn btn-sm btn-success" onClick={() => toggle(el)}>Detail</button> 
+                                                    <a href={'https://wa.me/'+el.phone} className="btn btn-sm btn-success">Whatsapp</a>
                                                 </td>
                                             </tr>
                                         )
