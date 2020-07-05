@@ -83,6 +83,7 @@ const Store = (props) => {
                                 </thead>
                                 <tbody>
                                     {data.map((el, i) => {
+                                        let handphone = el.phone
                                         return (
                                             <tr key={i}>
                                                 <td>{no++}</td>
@@ -93,7 +94,7 @@ const Store = (props) => {
                                                 <td>{numberFormat(el.userId.saldo)}</td>
                                                 <td>
                                                     <button className="btn btn-sm btn-success" onClick={() => toggle(el)}>Detail</button> 
-                                                    <a href={'https://wa.me/'+el.phone} className="btn btn-sm btn-success">Whatsapp</a>
+                                                    <a href={'https://wa.me/+62'+handphone.substr(1)} className="btn btn-sm btn-success">Whatsapp</a>
                                                 </td>
                                             </tr>
                                         )
