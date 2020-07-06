@@ -13,7 +13,7 @@ import {
 import { numberFormat } from '../../helpers'
 import { fetchGet } from '../../helpers/myFetch'
 import { debounce } from 'lodash'
-var idLocale = require('moment/locale/id');
+import idLocale from 'moment/locale/id'
 moment.locale('id', idLocale);  
 const Store = (props) => {
 
