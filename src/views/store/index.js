@@ -86,6 +86,7 @@ const Store = (props) => {
                   onChange={(e) => handleSearch(e.target.value)}
                 />
               </div>
+              <div className="table-responsive">
               <table className="table table-sm table-hover">
                 <thead>
                   <tr>
@@ -134,6 +135,7 @@ const Store = (props) => {
                   })}
                 </tbody>
               </table>
+              </div>
             </CCardBody>
           </CCard>
           <Pagination
@@ -155,6 +157,7 @@ const Store = (props) => {
               <CCardImg src={obj.logo} fluid className="mb-2" />
             </CCol>
             <CCol md="8">
+              <div className="table-responsive">
               <table className="table table-sm table-striped table-hover">
                 <tbody>
                   <tr>
@@ -199,6 +202,7 @@ const Store = (props) => {
                   </tr>
                 </tbody>
               </table>
+              </div>
             </CCol>
           </CRow>
         </CModalBody>
