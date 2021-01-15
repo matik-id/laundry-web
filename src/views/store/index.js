@@ -35,6 +35,7 @@ const Store = (props) => {
     if (!modal) {
       setModal(true);
       setObj(obj);
+      console.log(obj)
     } else {
       setModal(false);
     }
@@ -45,12 +46,10 @@ const Store = (props) => {
       setLoading(true);
       const hit = await fetchGet(`${Stores}?page=${page}&q=${q}`);
       if (hit.status) {
-        setData(hit.data.data);
+        setData(hit.data.docs);
         setPage(page);
-        setPerPage(hit.data.pagination.perPage);
-        setTotalPage(
-          hit.data.pagination.totalPages * hit.data.pagination.perPage
-        );
+        setPerPage(5);
+        setTotalPage(hit.data.total);
       } else {
         alert(hit.message);
       }
@@ -107,15 +106,15 @@ const Store = (props) => {
                       <tr key={i}>
                         <td>{no++}</td>
                         <td>{el.name}</td>
-                        <td>{el.userId.fullname}</td>
+                        <td>{el.user.fullname}</td>
                         <td>{el.phone}</td>
-                        <td>{el.userId.email}</td>
+                        <td>{el.user.email}</td>
                         <td>
                           {el.expired
                             ? "HABIS"
                             : moment(el.dueDate).format("DD MMMM YYYY")}
                         </td>
-                        <td>{numberFormat(el.userId.saldo)}</td>
+                        <td>{numberFormat(el.user.saldo)}</td>
                         <td>
                           <button
                             className="btn btn-sm btn-success"
@@ -163,13 +162,13 @@ const Store = (props) => {
                   <tr>
                     <td>ID User</td>
                     <td>:</td>
-                    <td>{obj.userId&&obj.userId._id?obj.userId._id:''}</td>
+                    <td>{obj.userId}</td>
                   </tr>
-                  <tr>
-                    <td>Nama User</td>
-                    <td>:</td>
-                    <td>{obj.userId&&obj.userId.fullname?obj.userId.fullname:''}</td>
-                  </tr>
+                    <tr>
+                      <td>Nama User</td>
+                      <td>:</td>
+                      <td>{obj.user && obj.user.fullname ? obj.user.fullname : ''}</td>
+                    </tr>
                   <tr>
                     <td>Nama Outlet</td>
                     <td>:</td>

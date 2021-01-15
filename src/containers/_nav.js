@@ -10,6 +10,12 @@ export default [
     name: 'Outlet',
     to: '/store',
     icon: 'cilHome'
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Topup',
+    to: '/topup',
+    icon: 'cil-star'
   }
 ]
 
