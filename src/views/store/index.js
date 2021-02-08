@@ -86,54 +86,58 @@ const Store = (props) => {
                 />
               </div>
               <div className="table-responsive">
-              <table className="table table-sm table-hover">
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Nama Outlet</th>
-                    <th>Nama Owner</th>
-                    <th>Telepon</th>
-                    <th>Email</th>
-                    <th>Masa Aktif</th>
-                    <th>Saldo</th>
-                    <th>Opsi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.map((el, i) => {
-                    let handphone = el.phone;
-                    return (
-                      <tr key={i}>
-                        <td>{no++}</td>
-                        <td>{el.name}</td>
-                        <td>{el.user.fullname}</td>
-                        <td>{el.phone}</td>
-                        <td>{el.user.email}</td>
-                        <td>
-                          {el.expired
-                            ? "HABIS"
-                            : moment(el.dueDate).format("DD MMMM YYYY")}
-                        </td>
-                        <td>{numberFormat(el.user.saldo)}</td>
-                        <td>
-                          <button
-                            className="btn btn-sm btn-success"
-                            onClick={() => toggle(el)}
-                          >
-                            Detail
+                <table className="table table-sm table-hover">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Nama Outlet</th>
+                      <th>Nama Owner</th>
+                      <th>Telepon</th>
+                      <th>Email</th>
+                      <th>Masa Aktif</th>
+                      <th>Masa Trial</th>
+                      <th>Status Aktif</th>
+                      <th>Saldo</th>
+                      <th>Opsi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.map((el, i) => {
+                      let handphone = el.phone;
+                      return (
+                        <tr key={i}>
+                          <td>{no++}</td>
+                          <td>{el.name}</td>
+                          <td>{el.user.fullname}</td>
+                          <td>{el.phone}</td>
+                          <td>{el.user.email}</td>
+                          <td>
+                            {el.expired
+                              ? "HABIS"
+                              : moment(el.dueDate).format("DD MMMM YYYY")}
+                          </td>
+                          <td>{el.isTrial ? "YA" : "TIDAK"}</td>
+                          <td>{el.isActive ? "YA" : "TIDAK"}</td>
+                          <td>{numberFormat(el.user.saldo)}</td>
+                          <td>
+                            <button
+                              className="btn btn-sm btn-success"
+                              onClick={() => toggle(el)}
+                            >
+                              Detail
                           </button>
-                          <a
-                            href={"https://wa.me/62" + handphone.substr(1)}
-                            className="btn btn-sm btn-success"
-                          >
-                            Whatsapp
+                            <a
+                              href={"https://wa.me/62" + handphone.substr(1)}
+                              className="btn btn-sm btn-success"
+                            >
+                              Whatsapp
                           </a>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
               </div>
             </CCardBody>
           </CCard>
@@ -157,50 +161,60 @@ const Store = (props) => {
             </CCol>
             <CCol md="8">
               <div className="table-responsive">
-              <table className="table table-sm table-striped table-hover">
-                <tbody>
-                  <tr>
-                    <td>ID User</td>
-                    <td>:</td>
-                    <td>{obj.userId}</td>
-                  </tr>
+                <table className="table table-sm table-striped table-hover">
+                  <tbody>
+                    <tr>
+                      <td>ID User</td>
+                      <td>:</td>
+                      <td>{obj.userId}</td>
+                    </tr>
                     <tr>
                       <td>Nama User</td>
                       <td>:</td>
                       <td>{obj.user && obj.user.fullname ? obj.user.fullname : ''}</td>
                     </tr>
-                  <tr>
-                    <td>Nama Outlet</td>
-                    <td>:</td>
-                    <td>{obj.name}</td>
-                  </tr>
-                  <tr>
-                    <td>Alamat</td>
-                    <td>:</td>
-                    <td>{obj.address}</td>
-                  </tr>
-                  <tr>
-                    <td>No Telepon</td>
-                    <td>:</td>
-                    <td>{obj.phone}</td>
-                  </tr>
-                  <tr>
-                    <td>Tanggal Daftar</td>
-                    <td>:</td>
-                    <td>{moment(obj.createdAt).format("LLLL")}</td>
-                  </tr>
-                  <tr>
-                    <td>Masa Aktif</td>
-                    <td>:</td>
-                    <td>{moment(obj.dueDate).format("LLLL")}</td>
-                  </tr>
-                  <tr>
-                    <td>Expired</td>
-                    <td>:</td>
-                    <td>{obj.expired ? "Ya" : "Tidak"}</td>
-                  </tr>
-                </tbody>
-              </table>
+                    <tr>
+                      <td>Nama Outlet</td>
+                      <td>:</td>
+                      <td>{obj.name}</td>
+                    </tr>
+                    <tr>
+                      <td>Alamat</td>
+                      <td>:</td>
+                      <td>{obj.address}</td>
+                    </tr>
+                    <tr>
+                      <td>No Telepon</td>
+                      <td>:</td>
+                      <td>{obj.phone}</td>
+                    </tr>
+                    <tr>
+                      <td>Tanggal Daftar</td>
+                      <td>:</td>
+                      <td>{moment(obj.createdAt).format("LLLL")}</td>
+                    </tr>
+                    <tr>
+                      <td>Masa Aktif</td>
+                      <td>:</td>
+                      <td>{moment(obj.dueDate).format("LLLL")}</td>
+                    </tr>
+                    <tr>
+                      <td>Expired</td>
+                      <td>:</td>
+                      <td>{obj.expired ? "Ya" : "Tidak"}</td>
+                    </tr>
+                    <tr>
+                      <td>Masa Trial</td>
+                      <td>:</td>
+                      <td>{obj.isTrial ? "Ya" : "Tidak"}</td>
+                    </tr>
+                    <tr>
+                      <td>Status Aktif</td>
+                      <td>:</td>
+                      <td>{obj.isActive ? "Ya" : "Tidak"}</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </CCol>
           </CRow>
