@@ -15,6 +15,7 @@ import {
   CModalBody,
   CModalFooter,
   CCardImg,
+  CBadge,
 } from "@coreui/react";
 import { numberFormat } from "../../helpers";
 import { fetchGet } from "../../helpers/myFetch";
@@ -24,9 +25,10 @@ moment.locale("id", idLocale);
 const Store = (props) => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = useState(5);
+  const [perPage, setPerPage] = useState(10);
   const [totalPage, setTotalPage] = useState(0);
   const [q, setQ] = useState("");
+  const [u, setU] = useState("");
   const [modal, setModal] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [obj, setObj] = useState({});
@@ -35,7 +37,6 @@ const Store = (props) => {
     if (!modal) {
       setModal(true);
       setObj(obj);
-      console.log(obj)
     } else {
       setModal(false);
     }
@@ -44,11 +45,11 @@ const Store = (props) => {
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
-      const hit = await fetchGet(`${Stores}?page=${page}&q=${q}`);
+      const hit = await fetchGet(`${Stores}?page=${page}&q=${q}&u=${u}`);
       if (hit.status) {
         setData(hit.data.docs);
         setPage(page);
-        setPerPage(5);
+        setPerPage(10);
         setTotalPage(hit.data.total);
       } else {
         alert(hit.message);
@@ -56,11 +57,16 @@ const Store = (props) => {
       setLoading(false);
     };
     fetch();
-  }, [page, q, props]);
+  }, [page, q, u, props]);
 
   const handleSearch = debounce((val) => {
     setQ(val);
   }, 500);
+
+  const handleSearchUser = debounce((val) => {
+    setU(val);
+  }, 500);
+
   let no = (page - 1) * perPage + 1;
 
   return (
@@ -77,14 +83,28 @@ const Store = (props) => {
               </div>
             )}
             <CCardBody>
-              <div className="input-group mb-3">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Cari berdasarkan nama outlet..."
-                  onChange={(e) => handleSearch(e.target.value)}
-                />
-              </div>
+              <CRow>
+                <CCol>
+                  <div className="input-group mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Cari berdasarkan nama outlet..."
+                      onChange={(e) => handleSearch(e.target.value)}
+                    />
+                  </div>
+                </CCol>
+                <CCol>
+                  <div className="input-group mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Cari berdasarkan nama owner..."
+                      onChange={(e) => handleSearchUser(e.target.value)}
+                    />
+                  </div>
+                </CCol>
+              </CRow>
               <div className="table-responsive">
                 <table className="table table-sm table-hover">
                   <thead>
@@ -112,12 +132,26 @@ const Store = (props) => {
                           <td>{el.phone}</td>
                           <td>{el.user.email}</td>
                           <td>
-                            {el.expired
-                              ? "HABIS"
-                              : moment(el.dueDate).format("DD MMMM YYYY")}
+                            {el.expired ? (
+                              <CBadge color="danger">HABIS</CBadge>
+                            ) : (
+                              <b>{moment(el.dueDate).format("DD MMMM YYYY")}</b>
+                            )}
                           </td>
-                          <td>{el.isTrial ? "YA" : "TIDAK"}</td>
-                          <td>{el.isActive ? "YA" : "TIDAK"}</td>
+                          <td>
+                            {el.isTrial ? (
+                              <CBadge color="warning">TRIAL</CBadge>
+                            ) : (
+                              <CBadge color="success">PELANGGAN</CBadge>
+                            )}
+                          </td>
+                          <td>
+                            {el.isActive ? (
+                              <CBadge color="success">AKTIF</CBadge>
+                            ) : (
+                              <CBadge color="warning">TIDAK AKTIF</CBadge>
+                            )}
+                          </td>
                           <td>{numberFormat(el.user.saldo)}</td>
                           <td>
                             <button
@@ -125,13 +159,13 @@ const Store = (props) => {
                               onClick={() => toggle(el)}
                             >
                               Detail
-                          </button>
+                            </button>
                             <a
                               href={"https://wa.me/62" + handphone.substr(1)}
                               className="btn btn-sm btn-success"
                             >
                               Whatsapp
-                          </a>
+                            </a>
                           </td>
                         </tr>
                       );
@@ -169,9 +203,16 @@ const Store = (props) => {
                       <td>{obj.userId}</td>
                     </tr>
                     <tr>
+                      <td>ID Outlet</td>
+                      <td>:</td>
+                      <td>{obj.id}</td>
+                    </tr>
+                    <tr>
                       <td>Nama User</td>
                       <td>:</td>
-                      <td>{obj.user && obj.user.fullname ? obj.user.fullname : ''}</td>
+                      <td>
+                        {obj.user && obj.user.fullname ? obj.user.fullname : ""}
+                      </td>
                     </tr>
                     <tr>
                       <td>Nama Outlet</td>

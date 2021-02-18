@@ -61,7 +61,7 @@ const TopupAdd = (props) => {
                                 <CSelect custom required onChange={e => setUserId(e.target.value)}>
                                     <option value="">---Plih User---</option>
                                     {allUser.map((el, i) => (
-                                        <option key={i} value={el.id}>ID {el.id} - {el.fullname}</option>
+                                        <option key={i} value={el.id}>{el.fullname} - ID {el.id}</option>
                                     ))}
                                 </CSelect>
                             </CFormGroup>
