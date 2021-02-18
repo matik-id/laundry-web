@@ -16,6 +16,12 @@ export default [
     name: 'Topup',
     to: '/topup',
     icon: 'cil-star'
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Subscribe Recap',
+    to: '/subscribe',
+    icon: 'cil-star'
   }
 ]
 
