@@ -28,7 +28,6 @@ const Store = (props) => {
   const [perPage, setPerPage] = useState(10);
   const [totalPage, setTotalPage] = useState(0);
   const [q, setQ] = useState("");
-  const [u, setU] = useState("");
   const [modal, setModal] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [obj, setObj] = useState({});
@@ -45,7 +44,7 @@ const Store = (props) => {
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
-      const hit = await fetchGet(`${Stores}?page=${page}&q=${q}&u=${u}`);
+      const hit = await fetchGet(`${Stores}?page=${page}&q=${q}`);
       if (hit.status) {
         setData(hit.data.docs);
         setPage(page);
@@ -61,10 +60,6 @@ const Store = (props) => {
 
   const handleSearch = debounce((val) => {
     setQ(val);
-  }, 500);
-
-  const handleSearchUser = debounce((val) => {
-    setU(val);
   }, 500);
 
   let no = (page - 1) * perPage + 1;
@@ -91,16 +86,6 @@ const Store = (props) => {
                       className="form-control"
                       placeholder="Cari berdasarkan nama outlet..."
                       onChange={(e) => handleSearch(e.target.value)}
-                    />
-                  </div>
-                </CCol>
-                <CCol>
-                  <div className="input-group mb-3">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Cari berdasarkan nama owner..."
-                      onChange={(e) => handleSearchUser(e.target.value)}
                     />
                   </div>
                 </CCol>
