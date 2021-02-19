@@ -56,7 +56,7 @@ const Store = (props) => {
       setLoading(false);
     };
     fetch();
-  }, [page, q, u, props]);
+  }, [page, q, props]);
 
   const handleSearch = debounce((val) => {
     setQ(val);
