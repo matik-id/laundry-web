@@ -13,8 +13,8 @@ export default [
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Topup',
-    to: '/topup',
+    name: 'Subscription',
+    to: '/subscription',
     icon: 'cil-star'
   },
   {
