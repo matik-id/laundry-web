@@ -79,7 +79,7 @@ const Subscription = (props) => {
                                             return (
                                                 <tr key={i}>
                                                     <td>{no++}</td>
-                                                    <td>{moment(el.dueDate).format("DD MMMM YYYY")}</td>
+                                                    <td>{moment(el.createdAt).format("DD MMMM YYYY")}</td>
                                                     <td>{el.noTrans}</td>
                                                     <td>{el.store.name}</td>
                                                     {/* <td>{el.user.fullname}</td> */}

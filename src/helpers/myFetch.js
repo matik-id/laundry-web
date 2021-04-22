@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-export const fetchGet = async (url) => {
+export const fetchGet = async (url, type = 'json') => {
     try {
-        const hit = await axios.get(url, { headers: { Authorization: 'Bearer ' + localStorage.getItem('authJwt') } })
+        const hit = await axios.get(url, { responseType: type, headers: { Authorization: 'Bearer ' + localStorage.getItem('authJwt') } })
         return hit.data
     } catch (error) {
         console.log(error)

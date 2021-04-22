@@ -19,8 +19,8 @@ export default [
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Subscribe Recap',
-    to: '/subscribe',
+    name: 'Report Subscription',
+    to: '/report/subscription',
     icon: 'cil-star'
   }
 ]
