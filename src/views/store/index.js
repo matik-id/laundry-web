@@ -15,6 +15,7 @@ import {
   CModalBody,
   CModalFooter,
   CCardImg,
+  CLink,
   CBadge,
 } from "@coreui/react";
 import { numberFormat } from "../../helpers";
@@ -63,6 +64,21 @@ const Store = (props) => {
   }, 500);
 
   let no = (page - 1) * perPage + 1;
+
+  const handleSubmit = async () => {
+    if (!obj.storeId) return alert('Store wajib diisi!')
+    const body = {
+        storeId: obj.storeId
+    }
+    const res = await fetchPost(expiredAddUrl, body)
+    if (res.status) {
+        alert('Data berhasil ditambahkan')
+        props.history.push('/store')
+    } else {
+        alert(res.message)
+        props.history.push('/store')
+    }
+}
 
   return (
     <>
@@ -246,6 +262,7 @@ const Store = (props) => {
           </CRow>
         </CModalBody>
         <CModalFooter>
+        <CLink className="btn btn-danger btn-sm float-right" to={handleSubmit}>Tambah 1 Bulan Masa Aktif</CLink>
           <CButton color="secondary" onClick={toggle}>
             Tutup
           </CButton>
