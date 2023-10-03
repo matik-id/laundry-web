@@ -10,6 +10,7 @@ const TheLayout = (props) => {
 
   const handleLogout = () => {
     localStorage.removeItem('authJwt')
+    localStorage.removeItem('authMe')
     props.history.push('/login')
   }
 

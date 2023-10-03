@@ -1,4 +1,5 @@
-export default [
+const auth = localStorage.getItem('authMe');
+const def = [
   {
     _tag: 'CSidebarNavItem',
     name: 'Dashboard',
@@ -11,6 +12,8 @@ export default [
     to: '/store',
     icon: 'cilHome'
   },
+];
+const report = [
   {
     _tag: 'CSidebarNavItem',
     name: 'Subscription',
@@ -24,4 +27,8 @@ export default [
     icon: 'cil-star'
   }
 ]
+
+const nav = !auth ? def : [...def, report]
+
+export default nav;
 

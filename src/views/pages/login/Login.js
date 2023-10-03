@@ -33,6 +33,7 @@ const Login = (props) => {
     const hit = await fetchPost(login, { email, password })
     if (!hit.status) return alert(hit.message)
     localStorage.setItem('authJwt', hit.data.token)
+    localStorage.setItem('authMe', hit.data.isAdmin)
     props.history.push('/')
   }
 
